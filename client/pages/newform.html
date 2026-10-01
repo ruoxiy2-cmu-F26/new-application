@@ -8,7 +8,7 @@
 
 <body>
     <section class="newevent">
-        <header>New Event</header>
+        <header class="header_newevent">New Event</header>
         <form>
             <div class="div_title">
                 <label>Title</label>
@@ -28,7 +28,10 @@
             </div>
 
             <div class="div_description">
-                <label>Description(optional)</label>
+                <div class="div_description_label">
+                    <label>Description</label>
+                    <span class="optional">(optional)</span>
+                </div>
                 <textarea class="input_description" placeholder="Room 204, bring your laptop"></textarea>
             </div>
 
@@ -46,7 +49,14 @@
 
 
     <section class="upcoming">
-        <header>Upcoming</header>
+        <header class="header_upcoming">
+            <label class="label_upcoming">Upcoming</label>
+            <div class="filters">
+                <button class="filter_all">All</button>
+                <button class="filter_invited">Invited</button>
+                <button class="filter_organized">Organized by me</button>
+            </div>
+        </header>
         <form>
 
             <!--the first event-->
@@ -63,13 +73,13 @@
                     <label class="title_event1">FSE project check-in</label>
                     <label class="time_event1">10:30 AM, organized by you</label>
                     <div class="statuschip_event1">
-                        <div class="statuschip_event1_accept">
-                            <label>·</label>
+                        <div class="statuschip_event1_1">
+                            <label class="dot1">•</label>
                             <label class="label_event1_1">Ruoxi: accepted</label>
                         </div>
 
-                        <div class="statuschip_event1_pending">
-                            <label>·</label>
+                        <div class="statuschip_event1_2">
+                            <label class="dot2">•</label>
                             <label class="label_event1_2">Sam: pending</label>
                         </div>
                     </div>
@@ -79,7 +89,7 @@
                     </div>
                 </div>
             </article>
-
+            <div class="divider"></div>
 
             <!--the second event-->
             <article class="event2">
@@ -94,15 +104,15 @@
                 <div class="details_event2">
                     <label class="title_event2">Study group: DOM events</label>
                     <label class="time_event2">2:00 PM, organized by you</label>
-                    <label>Room 204, bring your laptop</label>
+                    <label class="description_event2">Room 204, bring your laptop</label>
                     <div class="statuschip_event2">
-                        <div class="statuschip_event2_accept">
-                            <label>·</label>
-                            <label class="label_event2_1">Ruoxi: pending</label>
+                        <div class="statuschip_event2_1">
+                            <label class="dot2">•</label>
+                            <label class="label_event2_2">Ruoxi: pending</label>
                         </div>
 
-                        <div class="statuschip_event2_pending">
-                            <label>·</label>
+                        <div class="statuschip_event2_2">
+                            <label class="dot2">•</label>
                             <label class="label_event2_2">Ana: pending</label>
                         </div>
                     </div>
@@ -112,6 +122,7 @@
                     </div>
                 </div>
             </article>
+            <div class="divider"></div>
         </form>
     </section>
 
