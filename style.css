@@ -1,0 +1,366 @@
+.newevent {
+    width: 340px;
+    height: 490px;
+    border-radius: 12px;
+    border: 1px solid #D6DEE8;
+    padding: 20px;
+    gap: 14px;
+}
+
+.upcoming {
+    width: 736px;
+    height: 554px;
+    border-radius: 12px;
+    border: 1px solid #D6DEE8;
+    padding: 20px;
+    gap: 4px;
+
+}
+
+.div_title {
+    display: flex;
+    flex-direction: column;
+    width: 298px;
+    height: 64px;
+    gap: 6px;
+}
+
+.div_date_time {
+    display: flex;
+    flex-direction: row;
+    width: 298px;
+    height: 64px;
+    gap: 12px;
+}
+
+.div_date {
+    display: flex;
+    flex-direction: column;
+}
+
+.div_time {
+    display: flex;
+    flex-direction: column;
+}
+
+.div_description {
+    display: flex;
+    flex-direction: column;
+    width: 298px;
+    height: 103px;
+    gap: 6px;
+}
+
+.div_invite {
+    display: flex;
+    flex-direction: column;
+    width: 298px;
+    height: 84px;
+    gap: 6px;
+}
+
+.input_title {
+    width: 298px;
+    height: 41px;
+    border-radius: 8px;
+    border: 1px solid #D6DEE8;
+    padding-top: 10px;
+    padding-right: 12px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+}
+
+.input_date {
+    width: 143px;
+    height: 41px;
+    border-radius: 8px;
+    border: 1px solid #D6DEE8;
+    padding-top: 10px;
+    padding-right: 12px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+}
+
+.input_time {
+    width: 143px;
+    height: 41px;
+    border-radius: 8px;
+    border: 1px solid #D6DEE8;
+    padding-top: 10px;
+    padding-right: 12px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+}
+
+.input_description {
+    width: 298px;
+    height: 80px;
+    border-radius: 8px;
+    border: 1px solid #D6DEE8;
+    padding-top: 10px;
+    padding-right: 12px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+}
+
+.input_invite {
+    width: 298px;
+    height: 41px;
+    border-radius: 8px;
+    border: 1px solid #D6DEE8;
+    padding-top: 10px;
+    padding-right: 12px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+}
+
+.button_createevent {
+    width: 298px;
+    height: 39px;
+    border-radius: 8px;
+    border: none;
+    background-color: #1F3A5F;
+    color: #FFFFFF;
+    padding-top: 10px;
+    padding-right: 16px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+}
+
+label {
+    font: figtree;
+    font-style: bold;
+    font-size: 14px;
+    font-weight: 700;
+
+}
+
+hint {
+    font: figtree;
+    font-style: regular;
+    font-size: 12px;
+    font-weight: 400;
+    color: #5E6B7D;
+}
+
+placeholder {
+    font: figtree;
+    font-style: regular;
+    font-size: 16px;
+    font-weight: 400;
+    color: #8A94A6;
+}
+
+.event1,
+.event2 {
+    width: 694px;
+    height: 148px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    gap: 16px;
+    opacity: 1;
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+.datebox_event1 ,
+.datebox_event2{
+    width: 72px;
+    height: 82px;
+    border-radius: 8px;
+    border: 1px solid #D6DEE8;
+    display: flex;
+    flex-direction: column;
+}
+
+.month_event1,
+.month_event2{
+    width: fill;
+    height: hug;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-color: #1F3A5F;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.day_event1,
+.day_event2 {
+    width: fill;
+    height: hug;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-align: center;
+}
+
+.daynumber_event1,
+.daynumber_event2 {
+    font-family: Bricolage Grotesque;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 32px;
+    line-height: 34px;
+    letter-spacing: 0%;
+    color: #1F3A5F;
+    text-align: center;
+}
+
+.weekday_event1,
+.weekday_event2 {
+    font-family: Figtree;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #5E6B7D;
+    text-align: center;
+}
+
+.button_event1,
+.button_event2 {
+    display: flex;
+    flex-direction: row;
+    width: 169px;
+    height: 35px;
+    padding-top: 4px;
+    gap: 8px;
+}
+
+.button_event1_markdone,
+.button_event2_markdone {
+    font: secondary;
+    width: 98px;
+    height: 31px;
+    border-radius: 8px;
+    border: 1px solid #D6DEE8;
+    background-color: #FFFFFF;
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.button_event1_delete,
+.button_event2_delete {
+    font: danger;
+    width: 68px;
+    height: 31px;
+    border-radius: 8px;
+    border: 1px solid #D6DEE8;
+    background-color: #FFFFFF;
+    color: red;
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.statuschip_event1,
+.statuschip_event2 {
+    width: 250px;
+    height: 24px;
+    gap: 6px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.statuschip_event1_accept {
+    width: 129px;
+    height: 24px;
+    border-radius: 999px;
+    border: 1px solid #2E7D57;
+    color: #2E7D57;
+    padding-top: 3px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    gap: 6px;
+
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.statuschip_event1_pending {
+    width: 115px;
+    height: 24px;
+    border-radius: 999px;
+    border: 1px solid #8A94A6;
+    color: #8A94A6;
+    padding-top: 3px;
+    padding-right: 10px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    gap: 6px;
+
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.label_event1_1 {
+    font-family: Figtree;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 13px;
+    letter-spacing: 0;
+    white-space: nowrap;
+
+}
+
+.label_event1_2 {
+    font-family: Figtree;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 13px;
+    letter-spacing: 0;
+    white-space: nowrap;
+
+}
+
+
+.details_event1 {
+    display: flex;
+    flex-direction: column;
+    width: 606px;
+    height: 116px;
+    gap: 6px;
+    opacity: 1;
+
+}
+
+.title_event1,
+.title_event2 {
+    width: 180px;
+    height: 22px;
+    font-family: Bricolage Grotesque;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 18px;
+    color: #1B2330;
+    white-space: nowrap;
+}
+
+.time_event1,
+.time_event2 {
+    width: 174px;
+    height: 17px;
+    font-family: Figtree;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    color: #5E6B7D;
+    white-space: nowrap;
+
+}
