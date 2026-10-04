@@ -33,28 +33,35 @@ Review the box model, and simple styling.
 Build a static page with a “New Event” form(title, date, time, description, people who got invited) and two or three hardcoded events (static website only)
 HTML CSS Courses: (from 0:00 to 1:17:30 about 4 lessons)
 https://www.youtube.com/watch?v=G3e-cpL7ofc
+
 Week 2: HTML+CSS
 Watch the same video: 
 https://www.youtube.com/watch?v=G3e-cpL7ofc
 Watch the CSS Display Property and div Element (2:25:42–2:46:55), then Flexbox and Nested Flexbox (3:43:58–4:44:36), then CSS Position (4:44:36–5:33:49). Skip everything else in the video for now.
 Implement the full planner layout, including the top bar, bell badge, and toast position
+
 Week 3: JavaScript in the browser
 Watch this video(lesson 1 - 8) https://www.youtube.com/watch?v=EerdGm-ehJQ
 Adding JS on client side such as validating the event title
+
 Week 4: JavaScript in the Browser
 Watch the same video (lesson 9-12) 
 Build: the front-end-only planner. Submitting the form adds an event, events are stored in an array of objects, and a render() function redraws the list. This version saves nothing yet.
+
 Week 5: Client server and RestAPIS
 Should know the concepts: what the server is, HTTP requests and responses, status code, and JSON
 Know some basic server side structures
 Build a Node + Express server with routes, storing events in an in-memory array for now
 Learn how to test them using Postman
+
 Week 6: Database
 Should know the concepts: tables, rows, primary keys, and basic SQL (SELECT, INSERT, UPDATE, DELETE).
 Replace in memory with the databases
+
 Week 7: Socket.io
 Learn why REST alone cannot push updates (the server can only answer requests), WebSockets, and Socket.IO rooms.
 Implement to keep REST for changing data, and use socket only to notify people. For example, after the POST route saves an event, the server emits notify to each invitee's room
+
 Week 8: Rebuild the whole application with login-logout
 Implement login, register, and logout
 Separate by roles: organizers and invitees
