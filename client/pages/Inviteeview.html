@@ -3,7 +3,7 @@
 
 <head>
     <title> Welcome page </title>
-    <link rel="stylesheet" href="../css/Inviteeview.css">
+    <link rel="stylesheet" href="../css/Inviteestyle.css">
 </head>
 
 <body>
@@ -16,23 +16,27 @@
                     <div class="badge">
                         <div class="badge-count">2</div>
                     </div>
+
+                    <section class="notificationpanel">
+                        <label class="notificationpanel-header">Notifications</label>
+                        <div class="notificationpanel-content1">
+                            <div class="content1-message">Sophia invited you to "Study group: DOM events"</div>
+                            <div class="content1-time">2:14 PM</div>
+                        </div>
+                        <div class="notificationpanel-content2">
+                            <div class="content2-message">Sophia invited you to "FSE project check-in"</div>
+                            <div class="content2-time">2:12 PM</div>
+                        </div>
+                    </section>
+
+
                 </div>
 
             </div>
         </div>
 
     </header>
-    <section class="notificationpanel">
-        <label class="notificationpanel-header">Notifications</label>
-        <div class="notificationpanel-content1">
-            <div class="content1-message">Sophia invited you to "Study group: DOM events"</div>
-            <div class="content1-time">2:14 PM</div>
-        </div>
-        <div class="notificationpanel-content2">
-            <div class="content2-message">Sophia invited you to "FSE project check-in"</div>
-            <div class="content2-time">2:12 PM</div>
-        </div>
-    </section>
+
     <section class="main">
         <section class="newevent">
             <header class="header_newevent">New Event</header>
@@ -101,16 +105,17 @@
                         <label class="time_event1">10:30 AM, organized by you</label>
                         <div class="statuschip_event1">
                             <div class="statuschip_event1_1">
-                                <label class="dot1">`</label>
+                                <label class="dot1">&bull;</label>
                                 <label class="label_event1_1">Ruoxi: accepted</label>
                             </div>
 
                             <div class="statuschip_event1_2">
-                                <label class="dot2"></label>
+                                <label class="dot2">&bull;</label>
                                 <label class="label_event1_2">Sam: pending</label>
                             </div>
                         </div>
                         <div class="button_event1">
+                            <label class="button_event1_answer">Your answer:</label>
                             <button class="button_event1_accepted">Accepted</button>
                             <button class="button_event1_decline">Decline</button>
                         </div>
@@ -134,16 +139,17 @@
                         <label class="description_event2">Room 204, bring your laptop</label>
                         <div class="statuschip_event2">
                             <div class="statuschip_event2_1">
-                                <label class="dot2"></label>
+                                <label class="dot2">&bull;</label>
                                 <label class="label_event2_2">Ruoxi: pending</label>
                             </div>
 
                             <div class="statuschip_event2_2">
-                                <label class="dot2"></label>
+                                <label class="dot2">&bull;</label>
                                 <label class="label_event2_2">Ana: pending</label>
                             </div>
                         </div>
                         <div class="button_event2">
+                            <label class="button_event2_answer">Your answer:</label>
                             <button class="button_event2_accept">Accept</button>
                             <button class="button_event2_decline">Decline</button>
                         </div>
