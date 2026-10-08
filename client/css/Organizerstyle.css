@@ -370,7 +370,8 @@ placeholder {
     color: #8A94A6;
 }
 
-.event1 {
+.event1,
+.event3 {
     width: 694px;
     height: 148px;
     padding-top: 16px;
@@ -394,7 +395,8 @@ placeholder {
 }
 
 .datebox_event1,
-.datebox_event2 {
+.datebox_event2,
+.datebox_event3 {
     width: 72px;
     height: 82px;
     border-radius: 8px;
@@ -406,7 +408,8 @@ placeholder {
 }
 
 .month_event1,
-.month_event2 {
+.month_event2,
+.month_event3 {
     width: 70px;
     height: 20px;
     padding-top: 3px;
@@ -423,7 +426,8 @@ placeholder {
 }
 
 .day_event1,
-.day_event2 {
+.day_event2,
+.day_event3 {
     padding-top: 6px;
     padding-bottom: 6px;
     width: 70px;
@@ -432,7 +436,8 @@ placeholder {
 }
 
 .daynumber_event1,
-.daynumber_event2 {
+.daynumber_event2,
+.daynumber_event3 {
     font-family: Bricolage Grotesque;
     font-weight: 700;
     font-style: Bold;
@@ -444,7 +449,8 @@ placeholder {
 }
 
 .weekday_event1,
-.weekday_event2 {
+.weekday_event2,
+.weekday_event3 {
     font-family: Figtree;
     font-weight: 400;
     font-style: Regular;
@@ -455,7 +461,8 @@ placeholder {
 }
 
 .button_event1,
-.button_event2 {
+.button_event2,
+.button_event3 {
     display: flex;
     flex-direction: row;
     width: 169px;
@@ -465,7 +472,8 @@ placeholder {
 }
 
 .button_event1_markdone,
-.button_event2_markdone {
+.button_event2_markdone,
+.button_event3_markdone {
     font: secondary;
     width: 98px;
     height: 31px;
@@ -481,7 +489,8 @@ placeholder {
 }
 
 .button_event1_delete,
-.button_event2_delete {
+.button_event2_delete,
+.button_event3_delete {
     font: danger;
     width: 68px;
     height: 31px;
@@ -499,7 +508,8 @@ placeholder {
 
 
 .statuschip_event1,
-.statuschip_event2 {
+.statuschip_event2,
+.statuschip_event3 {
     width: 250px;
     height: 24px;
     gap: 6px;
@@ -528,7 +538,8 @@ placeholder {
 
 .statuschip_event1_2,
 .statuschip_event2_1,
-.statuschip_event2_2 {
+.statuschip_event2_2,
+.statuschip_event3_1 {
     width: 122px;
     height: 24px;
     border-radius: 999px;
@@ -549,7 +560,8 @@ placeholder {
 .label_event1_1,
 .label_event1_2,
 .label_event2_1,
-.label_event2_2 {
+.label_event2_2,
+.label_event3_1 {
     font-family: Figtree;
     font-weight: 400;
     font-style: Regular;
@@ -561,7 +573,8 @@ placeholder {
 
 
 .details_event1,
-.details_event2 {
+.details_event2,
+.details_event3 {
     display: flex;
     flex-direction: column;
     width: 606px;
@@ -570,7 +583,8 @@ placeholder {
 }
 
 .title_event1,
-.title_event2 {
+.title_event2,
+.title_event3 {
     width: 180px;
     height: 22px;
     font-family: Bricolage Grotesque;
@@ -582,7 +596,8 @@ placeholder {
 }
 
 .time_event1,
-.time_event2 {
+.time_event2,
+.time_event3 {
     width: 174px;
     height: 17px;
     font-family: Figtree;
@@ -593,7 +608,6 @@ placeholder {
     white-space: nowrap;
 
 }
-
 .dot1 {
     display: inline-block;
     width: 7px;
