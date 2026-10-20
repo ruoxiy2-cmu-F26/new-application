@@ -25,10 +25,10 @@
     <section class="main">
         <section class="newevent">
             <header class="header_newevent">New Event</header>
-            <form>
+            <form id="newform">
                 <div class="div_title">
                     <label>Title</label>
-                    <input class="input_title" type="text" placeholder="Study Group">
+                    <input id="input_title" type="text" placeholder="Study Group">
                 </div>
 
 
@@ -48,12 +48,12 @@
                         <label>Description</label>
                         <span class="optional">(optional)</span>
                     </div>
-                    <textarea class="input_description" placeholder="Room 204, bring your laptop"></textarea>
+                    <textarea id="input_description" placeholder="Room 204, bring your laptop"></textarea>
                 </div>
 
                 <div class="div_invite">
                     <label>Invite people</label>
-                    <input class="input_invite" type="text" placeholder="Ruoxi, Ana, Sam">
+                    <input id="input_invite" type="text" placeholder="Ruoxi, Ana, Sam">
                     <hint>Separate names with commas</hint>
                 </div>
 
@@ -171,7 +171,7 @@
         </section>
     </section>
 
-
+    <script src="../scripts/Organizer.js"></script>
 </body>
 
 </html>
