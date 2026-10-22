@@ -69,6 +69,7 @@ body {
     font-size: 14px;
     align-items: center;
 }
+
 .notificationpanel {
     width: 340px;
     border-radius: 12px;
@@ -80,6 +81,7 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 .notificationpanel {
     position: absolute;
 
@@ -90,6 +92,7 @@ body {
     border-radius: 16px;
     z-index: 100;
 }
+
 /* 每一条 notification 都使用这个 */
 .notificationpanel-content {
     width: 100%;
@@ -100,6 +103,7 @@ body {
     flex-direction: column;
     gap: 4px;
 }
+
 .bell-icon {
     width: 42px;
     height: 42px;
@@ -243,9 +247,10 @@ body {
 }
 
 .filter_active {
-    color:#1B2330;
+    color: #1B2330;
     background-color: #FFFFFF;
 }
+
 .header_newevent {
     font-family: Bricolage Grotesque;
     font-weight: 700;
@@ -414,7 +419,7 @@ placeholder {
 .event {
     /*width: 694px;*/
     /*height: 148px;*/
-    width:100%;
+    width: 100%;
     padding-top: 16px;
     padding-bottom: 16px;
     gap: 16px;
@@ -489,9 +494,7 @@ placeholder {
     gap: 8px;
 }
 
-.button_event1_markdone,
-.button_event2_markdone,
-.button_event3_markdone {
+.button_event_markdone {
     font: secondary;
     width: 98px;
     height: 31px;
@@ -506,9 +509,7 @@ placeholder {
     flex-direction: column;
 }
 
-.button_event1_delete,
-.button_event2_delete,
-.button_event3_delete {
+.button_event_delete {
     font: danger;
     width: 68px;
     height: 31px;
@@ -525,7 +526,7 @@ placeholder {
 }
 
 
-.statuschip_event{
+.statuschip_event {
     width: 250px;
     height: 24px;
     gap: 6px;
@@ -535,12 +536,11 @@ placeholder {
 }
 
 .statuschip_event_accepted,
-.statuschip_event_pending{
+.statuschip_event_pending,
+.statuschip_event_declined {
     width: 129px;
     height: 24px;
     border-radius: 999px;
-    border: 1px solid #2E7D57;
-    color: #2E7D57;
     padding-top: 3px;
     padding-right: 10px;
     padding-bottom: 3px;
@@ -552,14 +552,38 @@ placeholder {
     font-size: 12px;
     font-weight: 400;
 }
-.statuschip_event_accepted{
+
+.statuschip_event_accepted {
     border: 1px solid #2E7D57;
     color: #2E7D57;
 }
-.statuschip_event_pending{
+
+.statuschip_event_pending {
     border: 1px solid #8A94A6;
     color: #8A94A6;
 }
+
+.statuschip_event_declined {
+    border: 1px solid #B83A32;
+    color: #B83A32;
+}
+
+.statuschip_event_accepted .dot {
+    color: #2E7D57;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 75%;
+}
+
+.statuschip_event_pending .dot {
+    color: #8A94A6;
+}
+
+.statuschip_event_declined .dot {
+    color: #B83A32;
+}
+
 .label_event {
     font-family: Figtree;
     font-weight: 400;
@@ -571,7 +595,7 @@ placeholder {
 
 
 
-.details_event{
+.details_event {
     display: flex;
     flex-direction: column;
     width: 606px;
@@ -579,7 +603,7 @@ placeholder {
     gap: 6px;
 }
 
-.title_event{
+.title_event {
     width: 180px;
     height: 22px;
     font-family: Bricolage Grotesque;
@@ -590,7 +614,7 @@ placeholder {
     white-space: nowrap;
 }
 
-.time_event{
+.time_event {
     width: 174px;
     height: 17px;
     font-family: Figtree;
@@ -601,6 +625,7 @@ placeholder {
     white-space: nowrap;
 
 }
+
 .dot {
     display: inline-block;
     width: 7px;
@@ -614,4 +639,45 @@ placeholder {
     width: 694px;
     height: 1px;
     border: 1px solid #D6DEE8;
+}
+
+.your_answer {
+    white-space: nowrap
+}
+
+
+.button_event_accept {
+    font: secondary;
+    width: 78px;
+    height: 31px;
+    border-radius: 8px;
+    border: 1px solid #D6DEE8;
+    background-color: #FFFFFF;
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    display: flex;
+    flex-direction: column;
+    color: #2E7D57;
+}
+
+.button_event_decline {
+    font: danger;
+    width: 78px;
+    height: 31px;
+    border-radius: 8px;
+    border: 1px solid #D6DEE8;
+    background-color: #FFFFFF;
+    color: red;
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.button_selected {
+    opacity: 0.5;
 }

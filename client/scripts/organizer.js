@@ -36,8 +36,8 @@ eventForm.addEventListener("submit", function (event) {
                 status: "pending"
             };
         })
-    // 防止用户没有输入 invite people 时产生一个空名字
-    .filter(person => person.name !== "");
+        // 防止用户没有输入 invite people 时产生一个空名字
+        .filter(person => person.name !== "");
 
 
     const newEventData = {
@@ -92,9 +92,12 @@ function renderEvents() {
 
         //extract month/day/weekday from date
         const date = new Date(eventData.date + "T00:00:00");
-        const month = date.toLocaleString("en-US",{ month: "short" });
+        const month = date.toLocaleString("en-US", { month: "short" });
         const day = date.getDate();
-        const weekday = date.toLocaleString("en-US",{ weekday: "short" });
+        const weekday = date.toLocaleString("en-US", { weekday: "short" });
+
+    
+
 
         let statusHTML = "";
         eventData.invitees.forEach(function (person) {
@@ -114,20 +117,49 @@ function renderEvents() {
         let buttonHTML = "";
         //organizer button
         if (eventType === "organized") {
+            let markDoneText = "Mark done";
+            if (eventData.done === true) {
+                markDoneText = "Done";
+            }
             buttonHTML = `
                 <div class="button_event">
-                    <button class="button_event_markdone" type="button">Mark done</button>
+                    <button class="button_event_markdone" type="button">${markDoneText}</button>
                     <button class="button_event_delete" type="button">Delete</button>
                 </div>
             `;
         }
         //invitee button
-        if (eventType === "invited") {
+        /*if (eventType === "invited") {
             buttonHTML = `
                 <div class="button_event">
                     <label class="your_answer">Your answer:</label>
                     <button class="button_event_accept" type="button">Accept</button>
                     <button class="button_event_decline" type="button">Decline</button>
+                </div>
+            `;
+        }*/
+        if (eventType === "invited") {
+            const currentPerson = eventData.invitees.find(function (person) {
+                return person.name === currentUser;
+            });
+            let acceptText = "Accept";
+            let declineText = "Decline";
+            let acceptClass = "";
+            let declineClass = "";
+
+            if (currentPerson.status === "accepted") {
+                acceptText = "Accepted";
+                acceptClass = "button_selected";
+            }
+            if (currentPerson.status === "declined") {
+                declineText = "Declined";
+                declineClass = "button_selected";
+            }
+            buttonHTML = `
+                <div class="button_event">
+                    <label class="your_answer">Your answer:</label>
+                    <button class="button_event_accept ${acceptClass}" type="button">${acceptText}</button>
+                    <button class="button_event_decline ${declineClass}" type="button">${declineText}</button>
                 </div>
             `;
         }
@@ -152,6 +184,63 @@ function renderEvents() {
                         ${buttonHTML}
                     </div>
         `;
+
+        //invitee's button (accept or decline)
+        if (eventType === "invited") {
+            const acceptButton = newEvent.querySelector(".button_event_accept");
+            const declineButton = newEvent.querySelector(".button_event_decline");
+            //if click the"Accept"->status change(green)
+            acceptButton.addEventListener("click", function () {
+                const currentPerson = eventData.invitees.find(function (person) {
+                    return person.name === currentUser;
+                });
+                currentPerson.status = "accepted";
+                localStorage.setItem(
+                    "events",
+                    JSON.stringify(events)
+                );
+                renderEvents();
+            });
+            //if click the"Decline"->status change(red)
+            declineButton.addEventListener("click", function () {
+                const currentPerson = eventData.invitees.find(function (person) {
+                    return person.name === currentUser;
+                });
+                currentPerson.status = "declined";
+                localStorage.setItem(
+                    "events",
+                    JSON.stringify(events)
+                );
+                renderEvents();
+            });
+        }
+
+        //organizer's button (markdone & delete)
+        if (eventType === "organized") {
+            const markDoneButton = newEvent.querySelector(".button_event_markdone");
+            const deleteButton = newEvent.querySelector(".button_event_delete");
+            //click markdone->"done"
+            markDoneButton.addEventListener("click", function () {
+                eventData.done = true;
+                localStorage.setItem(
+                    "events",
+                    JSON.stringify(events)
+                );
+                renderEvents();
+            });
+
+            //click delete->the whole event display on the list
+            deleteButton.addEventListener("click", function () {
+                events = events.filter(function (event) {
+                    return event.id !== eventData.id;
+                });
+                localStorage.setItem(
+                    "events",
+                    JSON.stringify(events)
+                );
+                renderEvents();
+            });
+        }
         eventList.appendChild(newEvent);
     });
 }
