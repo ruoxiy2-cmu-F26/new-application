@@ -10,12 +10,18 @@
     <header class="topbar">
         <div class="topbar-left">planner</div>
         <div class="topbar-right">
-            <div class="topbar-right-signin">Signed in as<span class="topbar-right-username"> Sophia </span></div>
+            <div class="topbar-right-signin"></div>
             <div class="topbar-right-bell">
                 <div class="bell-icon"><img class="bell-icon-vector" src="../img/bell-icon-vector.png">
                     <div class="badge">
-                        <div class="badge-count">1</div>
+                        <div class="badge-count">0</div>
                     </div>
+                    <section class="notificationpanel">
+                        <label class="notificationpanel-header">Notifications</label>
+                        <div id="notificationList">
+
+                        </div>
+                    </section>
                 </div>
 
             </div>
@@ -68,14 +74,14 @@
             <header class="header_upcoming">
                 <label class="label_upcoming">Upcoming</label>
                 <div class="filters">
-                    <button class="filter_all">All</button>
+                    <button class="filter_all filter_active">All</button>
                     <button class="filter_invited">Invited</button>
                     <button class="filter_organized">Organized by me</button>
                 </div>
             </header>
-            <form>
 
-                <!--the first event-->
+            <!-- 
+
                 <article class="event1">
                     <div class="datebox_event1">
                         <div class="month_event1">Oct</div>
@@ -107,7 +113,7 @@
                 </article>
                 <div class="divider"></div>
 
-                <!--the second event-->
+
                 <article class="event2">
                     <div class="datebox_event2">
                         <div class="month_event2">Oct</div>
@@ -141,7 +147,7 @@
 
                 <div class="divider"></div>
 
-                <!--the third event-->
+
                 <article class="event3">
                     <div class="datebox_event3">
                         <div class="month_event3">Oct</div>
@@ -166,8 +172,46 @@
                         </div>
                     </div>
                 </article>
+                -->
+            <!--
+                <article class="event">
+                    <div class="datebox_event">
+                        <div class="month_event">Oct</div>
+                        <div class="day_event">
+                            <div class="daynumber_event">1</div>
+                            <div class="weekday_event">Thu</div>
+                        </div>
+                    </div>
 
-            </form>
+                    <div class="details_event1">
+                        <label class="title_event">FSE project check-in</label>
+                        <label class="time_event1">10:30 AM, organized by you</label>
+                        <div class="statuschip_event1">
+                            <div class="statuschip_event1_1">
+                                <label class="dot1">&bull;</label>
+                                <label class="label_event1_1">Ruoxi: accepted</label>
+                            </div>
+
+                            <div class="statuschip_event1_2">
+                                <label class="dot2">&bull;</label>
+                                <label class="label_event1_2">Sam: pending</label>
+                            </div>
+                        </div>
+                        <div class="button_event">
+                            <button class="button_event_markdone">Mark done</button>
+                            <button class="button_event_delete">Delete</button>
+                        </div>
+                    </div>
+                </article>
+                -->
+
+            <div id="eventList">
+
+                <div class="divider"></div>
+
+            </div>
+
+
         </section>
     </section>
 
