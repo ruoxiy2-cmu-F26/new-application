@@ -1,12 +1,29 @@
 
 //topbar & signinusername
-const currentUser = localStorage.getItem("currentUser");
-document.querySelector(".topbar-right-signin").innerHTML = `
-    Signed in as ${currentUser}
-`;
+const params = new URLSearchParams(window.location.search);
+const currentUser = params.get("username")?.trim() || "Guest";
+document.querySelector(".topbar-right-signin").textContent = `Signed in as ${currentUser}`;
 
 //all events
-let events = JSON.parse(localStorage.getItem("events")) || [];
+//let events = JSON.parse(localStorage.getItem("events")) || [];
+let events = [];
+
+
+async function loadEvents() {
+    try {
+        const response = await fetch("http://localhost:3000/api/events");
+        if (!response.ok) {
+            throw new Error("Failed to load events: " + response.status);
+        }
+        events = await response.json();
+        console.log("Loaded events:", events);
+        renderEvents();
+        updateBadge();
+        renderNotifications();
+    } catch (error) {
+        console.error("Error loading events:", error);
+    }
+}
 
 
 //left side: New Event Form
@@ -18,7 +35,8 @@ const inputTime = document.querySelector(".input_time");
 const inputDescription = document.getElementById("input_description");
 const inputInvite = document.getElementById("input_invite");
 
-eventForm.addEventListener("submit", function (event) {
+
+eventForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const title = inputTitle.value;
@@ -49,16 +67,72 @@ eventForm.addEventListener("submit", function (event) {
         organizer: currentUser,
         invitees: invitePeople
     };
-    events.push(newEventData);
-    localStorage.setItem(
-        "events",
-        JSON.stringify(events)
-    );
-    renderEvents();
-    updateBadge();
-    renderNotifications();
-    eventForm.reset();
+
+    try {
+        const response = await fetch("http://localhost:3000/api/events", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newEventData)
+        });
+        if (!response.ok) {
+            throw new Error("Failed to create event:" + response.status);
+        }
+        const createdEvent = await response.json();
+        events.push(createdEvent);
+        renderEvents();
+        eventForm.reset();
+
+        console.log("Event created:", createdEvent);
+
+    } catch (error) {
+        console.error("Error creating event:", error);
+        alert("Failed to create event.");
+    }
 });
+
+// eventForm.addEventListener("submit", function (event) {
+//     event.preventDefault();
+
+//     const title = inputTitle.value;
+//     const date = inputDate.value;
+//     const time = inputTime.value;
+//     const description = inputDescription.value;
+//     const invite = inputInvite.value;
+
+//     //extract invitees' name
+//     const invitePeople = invite
+//         .split(",")
+//         .map(name => {
+//             return {
+//                 name: name.trim(),
+//                 status: "pending"
+//             };
+//         })
+//         // 防止用户没有输入 invite people 时产生一个空名字
+//         .filter(person => person.name !== "");
+
+
+//     const newEventData = {
+//         id: Date.now(),//唯一性标志
+//         title: title,
+//         date: date,
+//         time: time,
+//         description: description,
+//         organizer: currentUser,
+//         invitees: invitePeople
+//     };
+//     events.push(newEventData);
+//     localStorage.setItem(
+//         "events",
+//         JSON.stringify(events)
+//     );
+//     renderEvents();
+//     updateBadge();
+//     renderNotifications();
+//     eventForm.reset();
+// });
 
 //the relationship between event and user
 function getEventType(eventData) {
@@ -96,7 +170,7 @@ function renderEvents() {
         const day = date.getDate();
         const weekday = date.toLocaleString("en-US", { weekday: "short" });
 
-    
+
 
 
         let statusHTML = "";
@@ -186,32 +260,100 @@ function renderEvents() {
         `;
 
         //invitee's button (accept or decline)
+        // if (eventType === "invited") {
+        //     const acceptButton = newEvent.querySelector(".button_event_accept");
+        //     const declineButton = newEvent.querySelector(".button_event_decline");
+        //     //if click the"Accept"->status change(green)
+        //     acceptButton.addEventListener("click", function () {
+        //         const currentPerson = eventData.invitees.find(function (person) {
+        //             return person.name === currentUser;
+        //         });
+        //         currentPerson.status = "accepted";
+        //         localStorage.setItem(
+        //             "events",
+        //             JSON.stringify(events)
+        //         );
+        //         renderEvents();
+        //     });
+        //     //if click the"Decline"->status change(red)
+        //     declineButton.addEventListener("click", function () {
+        //         const currentPerson = eventData.invitees.find(function (person) {
+        //             return person.name === currentUser;
+        //         });
+        //         currentPerson.status = "declined";
+        //         localStorage.setItem(
+        //             "events",
+        //             JSON.stringify(events)
+        //         );
+        //         renderEvents();
+        //     });
+        // }
+
+        // invitee's button (accept or decline)
         if (eventType === "invited") {
+
             const acceptButton = newEvent.querySelector(".button_event_accept");
             const declineButton = newEvent.querySelector(".button_event_decline");
-            //if click the"Accept"->status change(green)
-            acceptButton.addEventListener("click", function () {
-                const currentPerson = eventData.invitees.find(function (person) {
-                    return person.name === currentUser;
-                });
-                currentPerson.status = "accepted";
-                localStorage.setItem(
-                    "events",
-                    JSON.stringify(events)
-                );
-                renderEvents();
+
+            // Click Accept
+            acceptButton.addEventListener("click", async function () {
+                try {
+                    const response = await fetch(
+                        `http://localhost:3000/api/events/${eventData.id}/invitees/${encodeURIComponent(currentUser)}`,
+                        {
+                            method: "PATCH",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                status: "accepted"
+                            })
+                        }
+                    );
+
+                    if (!response.ok) {
+                        throw new Error("Failed to accept invitation: " + response.status);
+                    }
+
+                    await loadEvents();
+
+                    console.log("Invitation accepted successfully");
+
+                } catch (error) {
+                    console.error("Error accepting invitation:", error);
+                    alert("Failed to accept invitation.");
+                }
             });
-            //if click the"Decline"->status change(red)
-            declineButton.addEventListener("click", function () {
-                const currentPerson = eventData.invitees.find(function (person) {
-                    return person.name === currentUser;
-                });
-                currentPerson.status = "declined";
-                localStorage.setItem(
-                    "events",
-                    JSON.stringify(events)
-                );
-                renderEvents();
+
+
+            // Click Decline
+            declineButton.addEventListener("click", async function () {
+                try {
+                    const response = await fetch(
+                        `http://localhost:3000/api/events/${eventData.id}/invitees/${encodeURIComponent(currentUser)}`,
+                        {
+                            method: "PATCH",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                status: "declined"
+                            })
+                        }
+                    );
+
+                    if (!response.ok) {
+                        throw new Error("Failed to decline invitation: " + response.status);
+                    }
+
+                    await loadEvents();
+
+                    console.log("Invitation declined successfully");
+
+                } catch (error) {
+                    console.error("Error declining invitation:", error);
+                    alert("Failed to decline invitation.");
+                }
             });
         }
 
@@ -220,25 +362,85 @@ function renderEvents() {
             const markDoneButton = newEvent.querySelector(".button_event_markdone");
             const deleteButton = newEvent.querySelector(".button_event_delete");
             //click markdone->"done"
-            markDoneButton.addEventListener("click", function () {
-                eventData.done = true;
-                localStorage.setItem(
-                    "events",
-                    JSON.stringify(events)
-                );
-                renderEvents();
+            // markDoneButton.addEventListener("click", function () {
+            //     eventData.done = true;
+            //     localStorage.setItem(
+            //         "events",
+            //         JSON.stringify(events)
+            //     );
+            //     renderEvents();
+            // });
+            markDoneButton.addEventListener("click", async function () {
+                try {
+                    const response = await fetch(
+                        `http://localhost:3000/api/events/${eventData.id}`,
+                        {
+                            method: "PATCH",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                done: true
+                            })
+                        }
+                    );
+
+                    if (!response.ok) {
+                        throw new Error("Failed to update event: " + response.status);
+                    }
+
+                    const updatedEvent = await response.json();
+
+                    eventData.done = updatedEvent.done;
+
+                    renderEvents();
+
+                    console.log("Event updated:", updatedEvent);
+
+                } catch (error) {
+                    console.error("Error updating event:", error);
+                    alert("Failed to mark event as done.");
+                }
             });
 
             //click delete->the whole event display on the list
-            deleteButton.addEventListener("click", function () {
-                events = events.filter(function (event) {
-                    return event.id !== eventData.id;
-                });
-                localStorage.setItem(
-                    "events",
-                    JSON.stringify(events)
-                );
-                renderEvents();
+            // deleteButton.addEventListener("click", function () {
+            //     events = events.filter(function (event) {
+            //         return event.id !== eventData.id;
+            //     });
+            //     localStorage.setItem(
+            //         "events",
+            //         JSON.stringify(events)
+            //     );
+            //     renderEvents();
+            // });
+            deleteButton.addEventListener("click", async function () {
+                try {
+                    const response = await fetch(
+                        `http://localhost:3000/api/events/${eventData.id}`,
+                        {
+                            method: "DELETE"
+                        }
+                    );
+
+                    if (!response.ok) {
+                        throw new Error("Failed to delete event: " + response.status);
+                    }
+
+                    events = events.filter(function (e) {
+                        return e.id !== eventData.id;
+                    });
+
+                    renderEvents();
+                    updateBadge();
+                    renderNotifications();
+
+                    console.log("Event deleted successfully");
+
+                } catch (error) {
+                    console.error("Error deleting event:", error);
+                    alert("Failed to delete event.");
+                }
             });
         }
         eventList.appendChild(newEvent);
@@ -332,10 +534,11 @@ function renderNotifications() {
 }
 
 
-//show the event
-renderEvents();
+// //show the event
+// renderEvents();
 
-updateBadge();
+// updateBadge();
 
-//show notifications
-renderNotifications();
+// //show notifications
+// renderNotifications();
+loadEvents();
