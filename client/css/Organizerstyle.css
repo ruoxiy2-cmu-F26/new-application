@@ -681,3 +681,49 @@ placeholder {
 .button_selected {
     opacity: 0.5;
 }
+
+
+/* 整个 toast 区域的位置 */
+.toast {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1000;
+    max-width: calc(100vw - 48px);
+}
+
+/* 多条 toast 纵向排列 */
+#toastList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 每条 toast 的蓝色背景 */
+.toast-content {
+    box-sizing: border-box;
+    width: 320px;
+    max-width: 100%;
+    min-height: 58px;
+    padding: 12px 16px;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 10px;
+    border-left: 5px solid #F2B632;
+    background-color: #1F3A5F;
+    box-shadow: 0 10px 24px #1F3B5E4D;
+}
+
+/* toast 内的文字 */
+.toast-message {
+    margin: 0;
+    min-width: 0;
+    font-family: Figtree, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #FFFFFF;
+    overflow-wrap: anywhere;
+}

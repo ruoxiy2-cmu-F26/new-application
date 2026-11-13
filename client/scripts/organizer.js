@@ -4,6 +4,45 @@ const params = new URLSearchParams(window.location.search);
 const currentUser = params.get("username")?.trim() || "Guest";
 document.querySelector(".topbar-right-signin").textContent = `Signed in as ${currentUser}`;
 
+const toastedEventIds = new Set();
+
+//add
+const socket = io({//create a socket connection to the server
+    auth: { username: currentUser }
+});
+
+//event listener for notifications from the server
+socket.on("notify", async (data) => {//callback function when the server sends a notification
+    console.log("Notification received:", data);
+    if (data.type !== "event-invited") {
+        console.error("Unexpected notification type:", data.type);
+        return;
+    }
+    try {
+        const loadedEvents = await loadEvents();
+        const invitedEvent = loadedEvents.find((eventData) => {
+            return String(eventData.id) === String(data.eventId);
+        });
+        if (!invitedEvent) {
+            console.error("No matching event found", {
+                receivedEventId: data.eventId,
+                availableEventIds: loadedEvents.map(event => event.id)
+            });
+            return;
+        }
+        showInvitationToast(invitedEvent);
+        console.log("Toast created:", toastContainer.innerHTML);
+    } catch (error) {
+        console.error("Failed to display toast:", error);
+    }
+});
+
+//successfully connect to the server
+socket.on("connect", async () => {
+    const loadedEvents = await loadEvents();
+    showPendingInvitationToasts(loadedEvents);
+});
+
 //all events
 //let events = JSON.parse(localStorage.getItem("events")) || [];
 let events = [];
@@ -20,8 +59,10 @@ async function loadEvents() {
         renderEvents();
         updateBadge();
         renderNotifications();
+        return events;
     } catch (error) {
         console.error("Error loading events:", error);
+        return [];
     }
 }
 
@@ -541,4 +582,41 @@ function renderNotifications() {
 
 // //show notifications
 // renderNotifications();
-loadEvents();
+//loadEvents();
+
+//add toast function
+const toastContainer = document.getElementById("toastList");
+
+function showPendingInvitationToasts(loadedEvents) {
+    loadedEvents.forEach(function (eventData) {
+        const hasPendingInvite = (eventData.invitees ?? []).some(function (invitee) {
+            return invitee.name === currentUser && invitee.status === "pending";
+        });
+        if (hasPendingInvite) {
+            showInvitationToast(eventData);
+        }
+    });
+}
+
+function showInvitationToast(eventData) {
+    const eventId = String(eventData.id);
+    if (toastedEventIds.has(eventId)) {
+        return;
+    }
+    toastedEventIds.add(eventId);
+
+    const toast = document.createElement("div");
+    toast.classList.add("toast-content");
+
+    const message = document.createElement("div");
+    message.classList.add("toast-message");
+    message.textContent =
+        `${eventData.organizer} invited you to "${eventData.title}"`;
+
+    toast.appendChild(message);
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {//remove the toast after 5 seconds
+        toast.remove();
+    }, 5000);
+}

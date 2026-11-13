@@ -148,6 +148,8 @@ app.listen(PORT, function () {
     console.log(`Server running at http://localhost:${PORT}`);
 });
 */
+
+
 //create webserver,
 const express = require("express");
 //cross-origin resource sharing
@@ -157,9 +159,34 @@ const path = require("path");
 const eventRoutes = require("./routes/routes");
 const loggerMiddleware = require("./middleware/middleware");
 
+//add
+const http = require("node:http");
+const { Server } = require("socket.io");
+
 //create express application
 const app = express();
 const PORT = 3000;
+
+//add
+// 创建供 Express 和 Socket.IO 共用的服务器
+const server = http.createServer(app);
+const io = new Server(server);
+
+// controller 可以通过 req.app.get("io") 获取它
+app.set("io", io);
+
+// 每次浏览器建立连接时执行
+io.on("connection", (socket) => {
+    const username = socket.handshake.auth.username;
+
+    if (typeof username !== "string" || !username.trim()) {
+        socket.disconnect();
+        return;
+    }
+
+    // 例如 Bob 的连接加入 user:Bob
+    socket.join(`user:${username.trim()}`);
+});
 
 //middleware
 app.use(cors());
@@ -190,6 +217,35 @@ app.get("/", function(req, res) {
 });
 
 // Start server
-app.listen(PORT, function() {
+//把app.listen(PORT)改成server.listen(PORT)，因为我们要让Socket.IO和Express共用同一个服务器
+server.on("error", function(error) {
+    if (error.code !== "EADDRINUSE") {
+        console.error("Failed to start server:", error.message);
+        process.exitCode = 1;
+        return;
+    }
+
+    const request = http.get({
+        hostname: "127.0.0.1",
+        port: PORT,
+        path: "/login.html"
+    }, function(response) {
+        response.resume();
+        if (response.statusCode === 200) {
+            console.log(`Server is already running at http://localhost:${PORT}`);
+            return;
+        }
+
+        console.error(`Port ${PORT} is already in use by another application.`);
+        process.exitCode = 1;
+    });
+
+    request.on("error", function() {
+        console.error(`Port ${PORT} is already in use by another application.`);
+        process.exitCode = 1;
+    });
+});
+
+server.listen(PORT, function() {
     console.log(`Server running at http://localhost:${PORT}`);
 });
